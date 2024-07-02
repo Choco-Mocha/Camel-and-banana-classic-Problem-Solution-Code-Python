@@ -1,0 +1,45 @@
+#python code
+
+#use this to put in your custom settings
+'''d_tot = int(input('total distance to cover in km: ')) 
+b_tot = int(input('total bananas to take: '))
+c = int(input('camel capacity to lift banana: '))
+b_per_km = int(input('how many banana camel eat per km: '))'''
+#for showcasing the code, we use the following setting:
+d_tot = 1000
+b_tot = 3000
+c = 1000
+b_per_km = 1
+print(f'd_tot = {d_tot}, b_tot = {b_tot}, camel capacity = {c}, b_per_km = {b_per_km}')
+
+b_max = 0 #global
+d_rem = d_tot
+b_rem = b_tot
+
+print (f'initially: brem {b_rem} d_rem {d_rem}')
+if b_rem%c != 0: #check if bananas are a multiple of c
+       if  (b_rem%c) >=  (((b_rem*b_per_km/c)*2) + 1): #checking if it is worth it to carry the remainder and pay extra bananas for it
+           ban_carry = b_rem%c
+           a = ((b_rem*b_per_km/c)*2) + 1
+           distance_cover = ban_carry/a
+           d_rem = d_rem - distance_cover
+           b_rem = b_rem - ban_carry
+           print (f'brem {b_rem} d_rem {d_rem}')
+       else:
+           b_rem = b_rem - b_rem%c #else we leave the remainder if price of bananas carrying is too high
+           print (f'brem {b_rem} d_rem {d_rem}')
+
+while b_rem > c:
+    ban_carry = c
+    a = ((b_rem*b_per_km/c)*2) - 1
+    distance_cover = ban_carry/a
+    d_rem = d_rem - distance_cover
+    b_rem = b_rem - ban_carry
+    print (f'brem {b_rem} d_rem {d_rem}')
+
+if b_rem == c:
+    b_rem = b_rem - d_rem*b_per_km
+    d_rem = 0
+    print (f'max banana we can carry is {b_rem}')
+# we put print to see the process
+
